@@ -12,8 +12,6 @@ header {
   margin-bottom: 2rem;
 }
 
-/* Removed h1 styling */
-
 a {
   text-decoration: none;           /* No underline */
   color: black;                    /* Remove purple/blue link colors */
@@ -51,11 +49,12 @@ input, button {
   cursor: pointer;
   border-radius: 4px;
 }
-html,border-style{
+html,border-style,h1{
   height: 100%;
   width: 100%;
   margin = 10.f;
   padding =10.f;
   box-sizing: border-box;
   font-family: Arialm,sans-serif;
+  text-align: center;
 }
