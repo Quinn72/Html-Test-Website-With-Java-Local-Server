@@ -2,12 +2,29 @@ body {
   font-family: Arial, sans-serif;
   padding: 2rem;
   background: #f5f5f5;
+  margin: 0;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Removed h1 styling */
+
+a {
+  text-decoration: none;           /* No underline */
+  color: black;                    /* Remove purple/blue link colors */
+  padding: 0.5rem;
+  border: none;                    /* Remove border */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #0077cc;                  /* Optional hover effect */
 }
 
 form {
@@ -23,6 +40,7 @@ input, button {
   width: 100%;
   margin: 0.5rem 0;
   padding: 0.5rem;
+  box-sizing: border-box;
 }
 
 .logout-button {
@@ -31,4 +49,13 @@ input, button {
   border: none;
   padding: 0.5rem;
   cursor: pointer;
+  border-radius: 4px;
+}
+html,border-style{
+  height: 100%;
+  width: 100%;
+  margin = 10.f;
+  padding =10.f;
+  box-sizing: border-box;
+  font-family: Arialm,sans-serif;
 }

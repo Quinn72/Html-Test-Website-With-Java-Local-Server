@@ -5,34 +5,55 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 const session = require("express-session");
 
+const useLiveReload = process.argv.includes("--livereload");
+
 const app = express();
 const db = new sqlite3.Database("users.db");
+
+// ✅ Optional livereload
+if (useLiveReload) {
+    const livereload = require("livereload");
+    const connectLivereload = require("connect-livereload");
+
+    const liveReloadServer = livereload.createServer();
+    liveReloadServer.watch(path.join(__dirname, "public"));
+
+    app.use(connectLivereload());
+
+    liveReloadServer.server.once("connection", () => {
+        setTimeout(() => {
+            liveReloadServer.refresh("/");
+        }, 100);
+    });
+
+    console.log("🔁 Live reload is ENABLED");
+}
 
 // Middleware
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public"))); // Serve from /public
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(session({
     secret: "supersecretkey",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Use true if you're using HTTPS
+    cookie: { secure: false }
 }));
 
-// Ensure users table exists
+// Create users table if needed
 db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY,
     username TEXT UNIQUE,
     password TEXT
 )`);
 
-// Serve Home Page
+// Serve home page
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "home.html"));
 });
 
-// Register
+// Register user
 app.post("/register", async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -50,7 +71,7 @@ app.post("/register", async (req, res) => {
     }
 });
 
-// Login
+// Login user
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
@@ -65,7 +86,7 @@ app.post("/login", (req, res) => {
         }
 
         req.session.user = username;
-        res.json({ message: "Login successful", redirect: "welcome.html" });
+        res.json({ message: "Login successful", redirect: "Landing_Page.html" });
     });
 });
 
@@ -77,7 +98,7 @@ app.post("/logout", (req, res) => {
     });
 });
 
-// Check Login
+// Check login status
 app.get("/check-login", (req, res) => {
     if (req.session.user) {
         res.json({ loggedIn: true, username: req.session.user });
@@ -86,5 +107,24 @@ app.get("/check-login", (req, res) => {
     }
 });
 
+// Start server and allow LAN access
+const os = require("os");
 const PORT = 3000;
-app.listen(PORT, () => console.log(`✅ Server running: http://localhost:${PORT}`));
+
+app.listen(PORT, '0.0.0.0', () => {
+    const interfaces = os.networkInterfaces();
+    const addresses = [];
+
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                addresses.push(iface.address);
+            }
+        }
+    }
+
+    console.log(`✅ Server running locally:   http://localhost:${PORT}`);
+    addresses.forEach(addr =>
+        console.log(`🌐 LAN access available at: http://${addr}:${PORT}`)
+    );
+});

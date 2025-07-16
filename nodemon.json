@@ -1,0 +1,12 @@
+{
+  "name": "Html-Test-Website-With-Java-Local-Server",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0",
+    "livereload": "^0.9.3",
+    "connect-livereload": "^0.6.1"
+  }
+}
