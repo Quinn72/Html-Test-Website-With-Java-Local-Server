@@ -1,0 +1,79 @@
+/* snake.css */
+body {
+  background: #111;
+  color: #fff;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+a {
+  text-decoration: none;           /* No underline */
+  color: black;                    /* Remove purple/blue link colors */
+  padding: 0.5rem;
+  border: none;                    /* Remove border */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #0077cc;                  /* Optional hover effect */
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play-board {
+  display: grid;
+  grid-template-columns: repeat(20, 20px);
+  grid-template-rows: repeat(20, 20px);
+  gap: 1px;
+  background: #333;
+  padding: 10px;
+}
+
+.snake-head {
+  background: lime;
+}
+
+.snake-body {
+  background: green;
+}
+
+.food {
+  background: red;
+}
+
+.game-over-modal,
+.difficulty-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.difficulty-content,
+.game-over-modal {
+  background: #222;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
