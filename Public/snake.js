@@ -22,15 +22,9 @@ const gridSize = 20;
 function startGame(difficulty) {
   difficultyModal.style.display = "none";
   switch (difficulty) {
-    case "easy":
-      speed = 200;
-      break;
-    case "medium":
-      speed = 120;
-      break;
-    case "hard":
-      speed = 60;
-      break;
+    case "easy": speed = 200; break;
+    case "medium": speed = 120; break;
+    case "hard": speed = 60; break;
   }
 
   snake = [{ x: 5, y: 5 }];
@@ -51,10 +45,8 @@ function updateGame() {
   head.y += direction.y;
 
   if (
-    head.x < 0 ||
-    head.x >= gridSize ||
-    head.y < 0 ||
-    head.y >= gridSize ||
+    head.x < 0 || head.x >= gridSize ||
+    head.y < 0 || head.y >= gridSize ||
     isCollision(head)
   ) {
     return endGame();
@@ -74,7 +66,7 @@ function updateGame() {
 }
 
 function isCollision(pos) {
-  return snake.slice(1).some((segment) => segment.x === pos.x && segment.y === pos.y);
+  return snake.slice(1).some(seg => seg.x === pos.x && seg.y === pos.y);
 }
 
 function placeFood() {
@@ -84,7 +76,7 @@ function placeFood() {
       x: Math.floor(Math.random() * gridSize),
       y: Math.floor(Math.random() * gridSize),
     };
-  } while (snake.some((seg) => seg.x === newFoodPosition.x && seg.y === newFoodPosition.y));
+  } while (snake.some(seg => seg.x === newFoodPosition.x && seg.y === newFoodPosition.y));
   food = newFoodPosition;
 }
 
@@ -123,6 +115,24 @@ function changeDirection(e) {
   }
 }
 
+// Touch controls
+function setDirection(dir) {
+  switch (dir) {
+    case "up":
+      if (direction.y === 0) direction = { x: 0, y: -1 };
+      break;
+    case "down":
+      if (direction.y === 0) direction = { x: 0, y: 1 };
+      break;
+    case "left":
+      if (direction.x === 0) direction = { x: -1, y: 0 };
+      break;
+    case "right":
+      if (direction.x === 0) direction = { x: 1, y: 0 };
+      break;
+  }
+}
+
 function updateScore() {
   scoreElement.innerText = `Score: ${score}`;
   if (score > highScore) {
@@ -143,9 +153,9 @@ function endGame() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ score: score }),
   })
-    .then((res) => res.json())
-    .then((data) => console.log("Score submitted:", data))
-    .catch((err) => console.error("Score submission error:", err));
+    .then(res => res.json())
+    .then(data => console.log("Score submitted:", data))
+    .catch(err => console.error("Score submission error:", err));
 }
 
 function restartGame() {
@@ -159,6 +169,17 @@ function logout() {
   // Add your logout logic here
 }
 
+function isMobileDevice() {
+  return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 window.onload = () => {
   difficultyModal.style.display = "flex";
+
+  const touchControls = document.getElementById("touchControls");
+  if (isMobileDevice()) {
+    touchControls.style.display = "flex";
+  } else {
+    touchControls.style.display = "none";
+  }
 };

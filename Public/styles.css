@@ -1,7 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   padding: 2rem;
-  background: #f5f5f5;
+  background: #000000;
+  color: white;
   margin: 0;
 }
 
@@ -13,16 +14,16 @@ header {
 }
 
 a {
-  text-decoration: none;           /* No underline */
-  color: black;                    /* Remove purple/blue link colors */
+  text-decoration: none;
+  color: white;
   padding: 0.5rem;
-  border: none;                    /* Remove border */
+  border: none;
   cursor: pointer;
   transition: color 0.2s;
 }
 
 a:hover {
-  color: #0077cc;                  /* Optional hover effect */
+  color: #0077cc;
 }
 
 form {
@@ -31,7 +32,7 @@ form {
   border-radius: 6px;
   max-width: 300px;
   margin: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 input, button {
@@ -49,12 +50,32 @@ input, button {
   cursor: pointer;
   border-radius: 4px;
 }
-html,border-style,h1{
+
+html, body, h1 {
   height: 100%;
   width: 100%;
-  margin = 10.f;
-  padding =10.f;
+  margin: 10px;
+  padding: 10px;
   box-sizing: border-box;
-  font-family: Arialm,sans-serif;
+  font-family: Arial, sans-serif;
   text-align: center;
+}
+
+/* Container for the secret link */
+.link-container {
+  display: inline-block;
+  position: relative;
+}
+
+/* Hidden link styles */
+.Hidden-Link {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+/* Show on hover */
+.link-container:hover .Hidden-Link {
+  visibility: visible;
+  opacity: 1;
 }

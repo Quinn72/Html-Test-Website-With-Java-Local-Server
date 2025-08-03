@@ -1,40 +1,50 @@
 /* snake.css */
-body {
+
+html, body {
   background: #111;
   color: #fff;
   font-family: sans-serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: flex-start;
+  min-height: 100vh;
   margin: 0;
-}
-a {
-  text-decoration: none;           /* No underline */
-  color: black;                    /* Remove purple/blue link colors */
-  padding: 0.5rem;
-  border: none;                    /* Remove border */
-  cursor: pointer;
-  transition: color 0.2s;
+  padding: 1rem;
+  overflow-y: auto;
+  box-sizing: border-box;
+  overflow-y: hidden;
 }
 
-a:hover {
-  color: #0077cc;                  /* Optional hover effect */
+a {
+  margin-top: 10px;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
 }
 
 .play-board {
   display: grid;
-  grid-template-columns: repeat(20, 20px);
-  grid-template-rows: repeat(20, 20px);
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
   gap: 1px;
   background: #333;
-  padding: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+
+  width: 90vw;          /* Responsive width */
+  max-width: 600px;     /* Max width on large screens */
+  aspect-ratio: 1 / 1;  /* Keep square */
+
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
 }
 
 .snake-head {
@@ -49,31 +59,90 @@ a:hover {
   background: red;
 }
 
-.game-over-modal,
-.difficulty-modal {
+.score, .highscore {
+  font-size: 1.5rem;
+  margin: 0.2rem 0;
+}
+
+.scoreboard {
+  position: absolute;
+  top: 1vmin;
+  right: 2vmin;
+  font-size: 1.8rem;
+  text-align: right;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #444;
+}
+
+.difficulty-modal,
+.game-over-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
   display: none;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
   z-index: 1000;
+  padding: 2vmin;
+  box-sizing: border-box;
 }
 
-.difficulty-content,
-.game-over-modal {
+.difficulty-content {
   background: #222;
-  padding: 2rem;
-  border-radius: 10px;
+  padding: 3vmin;
+  border-radius: 2vmin;
   text-align: center;
+  width: 80vmin;
+  max-width: 90%;
 }
 
-button {
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
+.touch-controls {
+  display: none; /* hidden by default */
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.touch-controls > button,
+.touch-controls > div > button {
+  font-size: 6vmin;
+  padding: 2vmin;
+  margin: 1vmin;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 2vmin;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Show touch controls only on small devices */
+@media (max-width: 600px) {
+  .touch-controls {
+    display: flex;
+  }
+  
+  button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .score, .highscore {
+    font-size: 1.2rem;
+  }
 }

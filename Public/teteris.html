@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="teteris.css" />
+<title>Tetris Game</title>
+</head>
+<body>
+
+<h1>Tetris</h1>
+
+<canvas id="game" width="320" height="640" aria-label="Tetris game area" role="img"></canvas>
+
+<div id="score" aria-live="polite">Score: 0</div>
+<div id="highscore" aria-live="polite">High Score: 0</div>
+
+<div id="next-pieces" aria-label="Next Tetromino pieces preview">
+  <canvas id="preview1" width="64" height="64"></canvas>
+  <canvas id="preview2" width="64" height="64"></canvas>
+  <canvas id="preview3" width="64" height="64"></canvas>
+  <canvas id="preview4" width="64" height="64"></canvas>
+</div>
+
+<button id="mute-btn" aria-pressed="false" aria-label="Toggle game music">Mute</button>
+<button id="home-btn" onclick="location.href='Landing_Page.html'" aria-label="Go to home page">Home</button>
+
+<audio id="bg-music" src="Theme.mp3" loop autoplay hidden></audio>
+
+<script src="teteris.js"></script>
+
+</body>
+</html>

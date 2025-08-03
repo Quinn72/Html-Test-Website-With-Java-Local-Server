@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="silly.css" />
+  <title><!--Secret--></title>
+</head>
+<body>
+  <h1>I wish you luck</h1>
+  <div>
+    <span>To leave: </span>
+    <a onclick="homebtn()">Click Here</a>
+    <br>
+    <span>To Test Your Luck: </span>
+    <a onclick="Redirect()">Click Here</a>
+  </div>
+
+  <script>
+    function Randomint() {
+      return Math.floor(Math.random() * 2) + 1;
+    }
+
+    function Redirect() {
+      const value = Randomint();
+      const type = value === 1 ? "rick" : "midget";
+
+      // Send log to server
+      fetch("/log-link", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ type })
+      });
+
+      // Redirect accordingly
+      if (value === 1) {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      } else {
+        window.location.href = "https://www.youtube.com/watch?v=W10jcB62l80&pp=ygUVbWlkZ2V0IHdyZXN0bGluZyBzaG93";
+      }
+    }
+
+    function homebtn() {
+      window.location.href = "Landing_Page.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="veiwport" content="width=device-width, intial-scale=1.0">
-	<title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
-	<header>
-		<h1> Home </h1>
-		<div id="user-info"></div>
-	</header>
-	    <div>
-      <span> Click Here: </span>
-      <a href="snake.html">Play Snake</a>
+  <header>
+    <h1>Home</h1>
+    <div id="user-info">
+      <span style="margin-right: 10px;">👤 admin</span>
+      <button class="logout-button">Logout</button>
     </div>
-	<h2> welcome to the default landing page planned updates to be made unsure of direction of the project</h2>
-	<script src="http://localhost:35729/livereload.js"></script>
+  </header>
+
+  <div>
+    <span>Click Here:</span>
+    <a href="snake.html">Play Snake</a>
+    <span>Click Here:</span>
+    <a href="teteris.html">Play Tetris</a>
+
+    <!-- Hidden link next to the others -->
+    <span class="link-container">
+      <a class="Hidden-Link" href="Dumbshit.html">Secret Page</a>
+    </span>
+  </div>
+
+  <h2>
+    welcome to the default landing page planned updates to be made unsure of direction of the project
+  </h2>
+
+  <script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>

@@ -2,35 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Snake Game</title>
   <link rel="stylesheet" href="snake.css" />
   <script defer src="snake.js"></script>
-
-  <style>
-    /* Position the Home link in top-left corner */
-    #home-link {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background-color: #222;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      z-index: 1000;
-      box-shadow: 0 0 5px rgba(0,0,0,0.7);
-      transition: background-color 0.3s ease;
-    }
-    #home-link:hover {
-      background-color: #444;
-    }
-  </style>
 </head>
 <body>
   <button onclick="window.location.href='Landing_page.html'">Home</button>
-  <button onclick="logout()">Log Out</button>
 
   <div class="scoreboard">
     <h3>Top Score</h3>
@@ -41,6 +19,16 @@
     <div class="score">Score: 0</div>
     <div class="highscore">High Score: 0</div>
     <div class="play-board"></div>
+  </div>
+
+  <!-- Touch Controls (Only show on mobile) -->
+  <div class="touch-controls" id="touchControls">
+    <button onclick="setDirection('up')">↑</button>
+    <div>
+      <button onclick="setDirection('left')">←</button>
+      <button onclick="setDirection('down')">↓</button>
+      <button onclick="setDirection('right')">→</button>
+    </div>
   </div>
 
   <!-- Difficulty Modal -->
